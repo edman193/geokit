@@ -118,13 +118,18 @@ module Geokit
     end
 
     def self.from_string(thing)
+      binding.pry
       thing = thing.strip
       match = thing.match(/(\-?\d+\.?\d*)[, ] ?(\-?\d+\.?\d*)$/)
+      binding.pry
       if match
+        binding.pry
         Geokit::LatLng.new(match[1], match[2])
       else
+        binding.pry
         res = Geokit::Geocoders::MultiGeocoder.geocode(thing)
         return res if res.success?
+        binding.pry
         raise Geokit::Geocoders::GeocodeError
       end
     end
